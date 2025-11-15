@@ -1,26 +1,64 @@
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@import "tw-animate-css";
+@plugin "../lib/hero.ts";
+@plugin "@tailwindcss/typography";
+@source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --radius-sm: var(--heroui-radius-small);
+  --radius-md: var(--heroui-radius-medium);
+  --radius-lg: var(--heroui-radius-large);
+  --radius-xl: calc(var(--heroui-radius-large) + 4px);
+
+  --color-background: hsl(var(--heroui-background));
+  --color-foreground: hsl(var(--heroui-foreground));
+
+  --color-primary: hsl(var(--heroui-primary));
+  --color-primary-foreground: hsl(var(--heroui-primary-foreground));
+
+  --color-secondary: hsl(var(--heroui-default));
+  --color-secondary-foreground: hsl(var(--heroui-default-foreground));
+
+  --color-accent: hsl(var(--heroui-success));
+  --color-accent-foreground: hsl(var(--heroui-success-foreground));
+
+  --color-destructive: hsl(var(--heroui-danger));
+
+  --color-border: hsl(var(--heroui-divider));
+  --color-input: hsl(var(--heroui-default-200));
+  --color-ring: hsl(var(--heroui-focus));
+
+  --color-card: hsl(var(--heroui-content1));
+  --color-card-foreground: hsl(var(--heroui-content1-foreground));
+
+  --color-muted: hsl(var(--heroui-default-100));
+  --color-muted-foreground: hsl(var(--heroui-default-500));
+
+  --color-popover: hsl(var(--heroui-content1));
+  --color-popover-foreground: hsl(var(--heroui-content1-foreground));
+
+  --color-chart-1: hsl(var(--heroui-primary));
+  --color-chart-2: hsl(var(--heroui-secondary));
+  --color-chart-3: hsl(var(--heroui-success));
+  --color-chart-4: hsl(var(--heroui-warning));
+  --color-chart-5: hsl(var(--heroui-danger));
+
+  --color-sidebar: hsl(var(--heroui-content2));
+  --color-sidebar-foreground: hsl(var(--heroui-content2-foreground));
+  --color-sidebar-primary: hsl(var(--heroui-primary));
+  --color-sidebar-primary-foreground: hsl(var(--heroui-primary-foreground));
+  --color-sidebar-accent: hsl(var(--heroui-default-100));
+  --color-sidebar-accent-foreground: hsl(var(--heroui-default-foreground));
+  --color-sidebar-border: hsl(var(--heroui-divider));
+  --color-sidebar-ring: hsl(var(--heroui-focus));
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+  }
 }
