@@ -3,8 +3,22 @@ import { ReactNode } from "react";
 import { SidebarInset } from "../ui/sidebar";
 import AppSidebar from "./sidebar/app-sidebar";
 import AppNavbar from "./navbar/app-navbar";
+import { usePathname } from "next/navigation";
 
 export default function AppLayout({ children }: { children: ReactNode }) {
+  const pathname = usePathname();
+
+  const authRoutes = [
+    "/auth/login",
+    "/auth/register",
+    "/auth/forgot-password",
+    "/auth/reset-password",
+  ];
+  const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
+
+  if (isAuthRoute) {
+    return <div className="min-h-screen w-full flex">{children}</div>;
+  }
   return (
     <>
       <AppSidebar />

@@ -6,6 +6,7 @@ import {
   SidebarHeader,
 } from "@/components/ui/sidebar";
 import AppSidebarHeader from "./sidebar-header";
+import SidebarProfile from "./sidebar-profile";
 
 export default function AppSidebar() {
   return (
@@ -15,7 +16,9 @@ export default function AppSidebar() {
         <SidebarGroup />
         <SidebarGroup />
       </SidebarContent>
-      <SidebarFooter />
+      <SidebarFooter>
+        <SidebarProfile />
+      </SidebarFooter>
     </Sidebar>
   );
 }

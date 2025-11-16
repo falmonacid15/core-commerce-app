@@ -1,16 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Roboto, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/shared/providers";
 import AppLayout from "@/components/shared/app-layout";
+import { auth } from "@/auth";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const roboto = Roboto({
+  variable: "--font-roboto-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
   subsets: ["latin"],
 });
 
@@ -22,17 +23,16 @@ export const metadata: Metadata = {
   description: "Core Commerce E-commerce",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Providers>
+    <html lang="es">
+      <body className={`${roboto.variable} ${robotoMono.variable} antialiased`}>
+        <Providers session={session}>
           <AppLayout>{children}</AppLayout>
         </Providers>
       </body>
