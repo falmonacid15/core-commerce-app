@@ -15,7 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Core Commerce App",
+  title: {
+    default: "CoreCommerce",
+    template: "%s - CoreCommerce",
+  },
   description: "Core Commerce E-commerce",
 };
 

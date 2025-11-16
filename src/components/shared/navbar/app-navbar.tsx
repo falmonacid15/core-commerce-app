@@ -7,8 +7,15 @@ export default function AppNavbar() {
       <NavbarBrand>
         <SidebarTrigger />
       </NavbarBrand>
-      <NavbarContent>
-        <NavbarItem>item</NavbarItem>
+      <NavbarContent justify="start">
+        <NavbarItem></NavbarItem>
+      </NavbarContent>
+      <NavbarContent justify="center">
+        <NavbarItem></NavbarItem>
+      </NavbarContent>
+      <NavbarContent justify="end">
+        <NavbarItem></NavbarItem>
+        <NavbarItem></NavbarItem>
       </NavbarContent>
     </Navbar>
   );
