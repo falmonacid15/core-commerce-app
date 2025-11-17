@@ -1,9 +1,13 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/react";
+import NavbarShoppingCart from "./navbar-shopping-cart";
 
 export default function AppNavbar() {
   return (
-    <Navbar maxWidth="full">
+    <Navbar
+      maxWidth="full"
+      className="bg-content2/80 backdrop-blur-md shadow-sm"
+    >
       <NavbarBrand>
         <SidebarTrigger />
       </NavbarBrand>
@@ -14,8 +18,9 @@ export default function AppNavbar() {
         <NavbarItem></NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem></NavbarItem>
-        <NavbarItem></NavbarItem>
+        <NavbarItem>
+          <NavbarShoppingCart />
+        </NavbarItem>
       </NavbarContent>
     </Navbar>
   );

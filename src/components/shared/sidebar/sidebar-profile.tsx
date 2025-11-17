@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenuButton, useSidebar } from "@/components/ui/sidebar";
 import { getNameInitials } from "@/utils/formatters";
+import { Button } from "@heroui/react";
 import { ChevronsUpDown, LogOut, Settings } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -18,6 +19,10 @@ export default function SidebarProfile() {
   const { isMobile } = useSidebar();
   const { data: session } = useSession();
   const router = useRouter();
+
+  if (!session) {
+    return <Button>Iniciar sesion</Button>;
+  }
 
   return (
     <DropdownMenu>

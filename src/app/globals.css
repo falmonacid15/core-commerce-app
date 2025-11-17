@@ -48,7 +48,7 @@
   --color-sidebar-foreground: hsl(var(--heroui-content2-foreground));
   --color-sidebar-primary: hsl(var(--heroui-primary));
   --color-sidebar-primary-foreground: hsl(var(--heroui-primary-foreground));
-  --color-sidebar-accent: hsl(var(--heroui-default-100));
+  --color-sidebar-accent: hsl(var(--heroui-default-200));
   --color-sidebar-accent-foreground: hsl(var(--heroui-default-foreground));
   --color-sidebar-border: hsl(var(--heroui-default-900));
   --color-sidebar-ring: hsl(var(--heroui-focus));
