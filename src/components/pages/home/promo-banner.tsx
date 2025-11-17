@@ -1,10 +1,11 @@
+import GlareHover from "@/components/GlareHover";
 import { Button } from "@/components/ui/button";
 import { Tag, Clock } from "lucide-react";
 import Link from "next/link";
 
 export function PromoBanner() {
   return (
-    <section className="relative overflow-hidden bg-accent text-accent-foreground">
+    <section className="relative overflow-hidden bg-accent text-accent-foreground rounded-xl">
       <div className="absolute inset-0 bg-grid-white/5" />
       <div className="container relative px-4 py-16 md:px-6">
         <div className="mx-auto max-w-3xl text-center">

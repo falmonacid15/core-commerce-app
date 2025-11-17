@@ -6,7 +6,7 @@ export default function AppNavbar() {
   return (
     <Navbar
       maxWidth="full"
-      className="bg-content2/80 backdrop-blur-md shadow-sm"
+      className="bg-sidebar/40 backdrop-blur-md shadow-sm"
     >
       <NavbarBrand>
         <SidebarTrigger />

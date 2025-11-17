@@ -4,6 +4,7 @@ import { HeroUIProvider, ToastProvider } from "@heroui/react";
 import { SidebarProvider } from "../ui/sidebar";
 import { ThemeProvider } from "./theme-provider";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { queryClient } from "@/lib/react-query";
 import { Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
@@ -18,6 +19,7 @@ export default function Providers({
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
         <ThemeProvider>
           <HeroUIProvider>
             <ToastProvider />

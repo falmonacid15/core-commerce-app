@@ -22,9 +22,16 @@ import {
   ChevronRight,
   Database,
   FileText,
+  Folders,
   Home,
+  LayoutDashboard,
+  Package,
   Settings,
+  SlidersHorizontal,
   Store,
+  Truck,
+  UserCog,
+  Users,
 } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
@@ -54,29 +61,40 @@ export default function AppSidebarContent() {
       icon: Store,
       items: [
         {
+          name: "Pagina principal",
+          href: "/admin/home-page-settings",
+          icon: LayoutDashboard,
+        },
+        {
           name: "Ajustes de tienda",
           href: "/admin/store-settings",
           icon: Settings,
         },
-        { name: "Personal", href: "/staff", icon: Settings },
-        { name: "Clientes", href: "/customers", icon: Settings },
-        { name: "Proveedores", href: "/suppliers", icon: Settings },
+        { name: "Personal", href: "/admin/staff", icon: UserCog },
+        { name: "Clientes", href: "/admin/customers", icon: Users },
+        { name: "Proveedores", href: "/admin/suppliers", icon: Truck },
       ],
     },
     {
       title: "Facturación",
       icon: FileText,
       items: [
-        { name: "Ordenes", href: "/orders", icon: Settings },
-        { name: "Facturas", href: "/invoices", icon: Settings },
+        { name: "Ordenes", href: "/admin/orders", icon: Settings },
+        { name: "Facturas", href: "/admin/invoices", icon: Settings },
       ],
     },
     {
       title: "Mantenedores",
       icon: Database,
       items: [
-        { name: "Productos", href: "/products", icon: Box },
-        { name: "Categorías", href: "/categories", icon: Box },
+        { name: "Usuarios", href: "/admin/users", icon: Package },
+        { name: "Productos", href: "/admin/products", icon: Package },
+        {
+          name: "Atributos",
+          href: "/admin/attributes",
+          icon: SlidersHorizontal,
+        },
+        { name: "Categorías", href: "/admin/categories", icon: Folders },
       ],
     },
   ];

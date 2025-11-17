@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Roboto, Roboto_Mono } from "next/font/google";
+import { Roboto, Roboto_Mono } from "next/font/google";
+
 import "./globals.css";
+import "atropos/css";
+
 import Providers from "@/components/shared/providers";
 import AppLayout from "@/components/shared/app-layout";
+
 import { auth } from "@/auth";
 
 const roboto = Roboto({
