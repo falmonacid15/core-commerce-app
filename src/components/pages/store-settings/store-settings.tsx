@@ -28,7 +28,7 @@ export default function StoreSettings() {
           <Input
             isRequired
             isDisabled
-            variant="faded"
+            variant="flat"
             label="Nombre de la tienda"
             placeholder="Mi tienda"
           />
@@ -36,7 +36,7 @@ export default function StoreSettings() {
           <Input
             isRequired
             isDisabled
-            variant="faded"
+            variant="flat"
             label="Slug (URL)"
             placeholder="Este será parte de tu URL: tienda.com/mi-tienda-online"
           />
@@ -44,7 +44,7 @@ export default function StoreSettings() {
         <Textarea
           isRequired
           isDisabled
-          variant="faded"
+          variant="flat"
           label="Descripción"
           placeholder="Describe tu tienda..."
           rows={4}
@@ -53,7 +53,7 @@ export default function StoreSettings() {
           <Input
             isRequired
             isDisabled
-            variant="faded"
+            variant="flat"
             label="Email de contacto"
             placeholder="contacto@tienda.com"
           />
@@ -61,7 +61,7 @@ export default function StoreSettings() {
           <Input
             isRequired
             isDisabled
-            variant="faded"
+            variant="flat"
             label="Teléfono de contacto"
             placeholder="+56 9 1234 5678"
           />
@@ -69,27 +69,10 @@ export default function StoreSettings() {
         <Input
           isRequired
           isDisabled
-          variant="faded"
+          variant="flat"
           label="Dirección"
           placeholder="Av. Principal 123, Ciudad"
         />
-        <div className="grid gap-6 md:grid-cols-2">
-          <Input
-            isRequired
-            isDisabled
-            variant="faded"
-            label="Dirección"
-            placeholder="Av. Principal 123, Ciudad"
-          />
-
-          <Input
-            isRequired
-            readOnly
-            variant="faded"
-            label="Dirección"
-            placeholder="Av. Principal 123, Ciudad"
-          />
-        </div>
       </CardBody>
     </Card>
   );

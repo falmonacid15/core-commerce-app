@@ -43,4 +43,7 @@ export interface DataTableProps<T extends BaseRow> {
   onView?: (item: T) => void;
   onEdit?: (item: T) => void;
   onDelete?: (item: T) => void;
+
+  onPdfExportItem?: (item: T) => void;
+  onExcelExportItem?: (item: T) => void;
 }

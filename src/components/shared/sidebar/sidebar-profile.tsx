@@ -9,9 +9,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { SidebarMenuButton, useSidebar } from "@/components/ui/sidebar";
+import { roleDictionary } from "@/constants/dictionaries";
 import { getNameInitials } from "@/utils/formatters";
 import { Button } from "@heroui/react";
-import { ChevronsUpDown, LogOut, Settings } from "lucide-react";
+import { ChevronsUpDown, LogIn, LogOut, Settings } from "lucide-react";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -20,8 +21,18 @@ export default function SidebarProfile() {
   const { data: session } = useSession();
   const router = useRouter();
 
-  if (open && !session) {
-    return <Button>Iniciar sesion</Button>;
+  if (!session) {
+    return (
+      <Button
+        isIconOnly={!open}
+        onPress={() => {
+          router.push("/auth/login");
+        }}
+        size="sm"
+      >
+        {open ? "Iniciar sesión" : <LogIn className="size-4" />}
+      </Button>
+    );
   }
 
   return (
@@ -39,7 +50,9 @@ export default function SidebarProfile() {
           </Avatar>
           <div className="grid flex-1 text-left text-sm leading-tight">
             <span className="truncate font-medium">{session?.user?.name}</span>
-            <span className="truncate text-xs"></span>
+            <span className="truncate text-xs">
+              {roleDictionary[session?.user?.role]}
+            </span>
           </div>
           <ChevronsUpDown className="ml-auto size-4" />
         </SidebarMenuButton>

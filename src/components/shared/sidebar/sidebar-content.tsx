@@ -18,23 +18,14 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import {
-  Box,
-  ChevronRight,
-  ClipboardList,
-  Database,
-  FileSpreadsheet,
-  FileText,
-  Folders,
-  Home,
-  LayoutDashboard,
-  Package,
-  Settings,
-  SlidersHorizontal,
-  Store,
-  Truck,
-  UserCog,
-  Users,
-} from "lucide-react";
+  adminNavItems,
+  clientNavItems,
+  ownerNavItems,
+  publicNavItems,
+  sellerNavItems,
+} from "@/constants/sidebar";
+import { NavigationItems } from "@/types/sidebar";
+import { ChevronRight } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -44,71 +35,24 @@ export default function AppSidebarContent() {
   const { data: session } = useSession();
   const { setOpen, open } = useSidebar();
 
-  const clientNavItems = [
-    {
-      title: "Productos",
-      icon: Box,
-      items: [{ name: "Mejores valorados", href: "/products", icon: Box }],
-    },
-    {
-      title: "Categorías",
-      icon: Box,
-      items: [{ name: "Mejores valorados", icon: Box, href: "/categories" }],
-    },
-  ];
-
-  const adminNavItems = [
-    {
-      title: "Tienda",
-      icon: Store,
-      items: [
-        {
-          name: "Pagina principal",
-          href: "/admin/home-page-settings",
-          icon: LayoutDashboard,
-        },
-        {
-          name: "Ajustes de tienda",
-          href: "/admin/store-settings",
-          icon: Settings,
-        },
-        { name: "Personal", href: "/admin/staff", icon: UserCog },
-        { name: "Clientes", href: "/admin/customers", icon: Users },
-        { name: "Proveedores", href: "/admin/suppliers", icon: Truck },
-      ],
-    },
-    {
-      title: "Facturación",
-      icon: FileText,
-      items: [
-        { name: "Ordenes", href: "/admin/orders", icon: ClipboardList },
-        { name: "Documentos", href: "/admin/invoices", icon: FileSpreadsheet },
-      ],
-    },
-    {
-      title: "Mantenedores",
-      icon: Database,
-      items: [
-        { name: "Usuarios", href: "/admin/maintainers/users", icon: Users },
-        { name: "Productos", href: "/admin/products", icon: Package },
-        {
-          name: "Atributos",
-          href: "/admin/attributes",
-          icon: SlidersHorizontal,
-        },
-        { name: "Categorías", href: "/admin/categories", icon: Folders },
-      ],
-    },
-  ];
-
-  const renderCollapsibleNavGroup = (
-    navItems: typeof adminNavItems,
-    groupLabel: string
-  ) => (
+  const renderSidebarMenu = (navItems: NavigationItems, groupLabel: string) => (
     <SidebarGroup>
       <SidebarGroupLabel>{groupLabel}</SidebarGroupLabel>
       <SidebarMenu>
-        {navItems.map((group) => (
+        {navItems.items?.map((navItem) => (
+          <SidebarMenuItem key={navItem.name}>
+            <SidebarMenuButton
+              className="cursor-pointer"
+              onClick={() => router.push(navItem.href)}
+              isActive={pathName === navItem.href}
+              tooltip={navItem.name}
+            >
+              <navItem.icon className="w-4 h-4" />
+              <span>{navItem.name}</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        ))}
+        {navItems.collapsible?.map((group) => (
           <Collapsible key={group.title} className="group/collapsible">
             <SidebarMenuItem>
               <CollapsibleTrigger
@@ -123,6 +67,7 @@ export default function AppSidebarContent() {
                   <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
                 </SidebarMenuButton>
               </CollapsibleTrigger>
+
               <CollapsibleContent>
                 <SidebarMenuSub>
                   {group.items.map((item) => (
@@ -151,24 +96,21 @@ export default function AppSidebarContent() {
 
   return (
     <SidebarContent>
-      <SidebarGroup>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              className="cursor-pointer"
-              onClick={() => router.push("/")}
-              isActive={pathName === "/"}
-            >
-              <Home className="w-4 h-4" />
-              <span>Inicio</span>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarGroup>
-
-      {session?.user.role === "CLIENT"
-        ? renderCollapsibleNavGroup(adminNavItems, "Administrador")
-        : renderCollapsibleNavGroup(clientNavItems, "Navegación")}
+      {session &&
+        session.user.role === "ADMIN" &&
+        renderSidebarMenu(adminNavItems, "Administrador")}
+      {session &&
+        session.user.role === "OWNER" &&
+        renderSidebarMenu(ownerNavItems, "Dueño")}
+      {session &&
+        session.user.role === "SELLER" &&
+        renderSidebarMenu(sellerNavItems, "Vendedor")}
+      {session &&
+        session.user.role === "CLIENT" &&
+        renderSidebarMenu(clientNavItems, "Cliente")}
+      {session && session?.user.role === "ADMIN"
+        ? null
+        : renderSidebarMenu(publicNavItems, "Navegación")}
     </SidebarContent>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Chip,
   Table,
   TableBody,
   TableCell,
@@ -17,6 +18,7 @@ import TopContent from "./top-content";
 import BottomContent from "./bottom-content";
 import EmptyContent from "./empy-content";
 import LoadingContent from "./loading-content";
+import { roleDictionary } from "@/constants/dictionaries";
 
 export default function DataTable<T extends BaseRow>({
   rows,
@@ -37,6 +39,8 @@ export default function DataTable<T extends BaseRow>({
   onView,
   onEdit,
   onDelete,
+  onExcelExportItem,
+  onPdfExportItem,
 }: DataTableProps<T>) {
   const [localPage, setLocalPage] = useState(1);
 
@@ -97,8 +101,13 @@ export default function DataTable<T extends BaseRow>({
           onView={onView}
           onEdit={onEdit}
           onDelete={onDelete}
+          onExcelExportItem={onExcelExportItem}
+          onPdfExportItem={onPdfExportItem}
         />
       );
+    }
+    if (columnKey === "role") {
+      return <Chip>{roleDictionary[value]}</Chip>;
     }
 
     if (columnKey === "image") {
@@ -130,6 +139,8 @@ export default function DataTable<T extends BaseRow>({
           columns={columns}
           visibleColumns={visibleColumns}
           onVisibleColumnsChange={setVisibleColumns}
+          onExcelExportItem={onExcelExportItem}
+          onPdfExportItem={onPdfExportItem}
         />
       }
       bottomContent={
@@ -138,6 +149,8 @@ export default function DataTable<T extends BaseRow>({
           currentPage={currentPage}
           handleChangePage={handlePageChange}
           isLoading={isLoading}
+          itemsPerPage={itemsPerPage}
+          onItemsPerPageChange={onItemsPerPageChange}
         />
       }
     >

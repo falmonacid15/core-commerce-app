@@ -6,8 +6,17 @@ import {
   DropdownMenu,
   DropdownTrigger,
   Input,
+  Tooltip,
 } from "@heroui/react";
-import { ChevronDownIcon, Columns, Eye, EyeClosed, Search } from "lucide-react";
+import {
+  ChevronDownIcon,
+  Columns,
+  Eye,
+  EyeClosed,
+  FileType,
+  Search,
+  Table,
+} from "lucide-react";
 import { ReactNode } from "react";
 
 interface TopContentProps {
@@ -19,6 +28,8 @@ interface TopContentProps {
   visibleColumns?: Set<string>;
   onVisibleColumnsChange?: (columns: Set<string>) => void;
   onSearchQueryChange?: (query: string) => void;
+  onPdfExportItem?: () => void;
+  onExcelExportItem?: () => void;
 }
 
 export default function TopContent({
@@ -30,11 +41,42 @@ export default function TopContent({
   columns,
   visibleColumns,
   onVisibleColumnsChange,
+  onExcelExportItem,
+  onPdfExportItem,
 }: TopContentProps) {
   return (
     <div className="flex justify-between gap-4 items-center">
       {headerActions && headerActions}
-      <div className="flex gap-4 w-full justify-end">
+      <div className="flex gap-4 w-full justify-end items-center">
+        <div className="flex gap-2">
+          {onPdfExportItem && (
+            <Tooltip content="Exportar pagina completa a PDF" closeDelay={10}>
+              <Button
+                isIconOnly
+                size="sm"
+                variant="solid"
+                onPress={() => onPdfExportItem()}
+              >
+                <FileType className="size-4" />
+              </Button>
+            </Tooltip>
+          )}
+          {onExcelExportItem && (
+            <Tooltip
+              content="Exportar pagina completa a Hoja de cálculos (Excel)"
+              closeDelay={10}
+            >
+              <Button
+                isIconOnly
+                size="sm"
+                variant="solid"
+                onPress={() => onExcelExportItem()}
+              >
+                <Table className="size-4" />
+              </Button>
+            </Tooltip>
+          )}
+        </div>
         {columnsActions && visibleColumns && onVisibleColumnsChange && (
           <Dropdown placement="bottom-start">
             <DropdownTrigger className="hidden sm:flex">
@@ -46,7 +88,6 @@ export default function TopContent({
                 Columnas
               </Button>
             </DropdownTrigger>
-
             <DropdownMenu
               variant="solid"
               disallowEmptySelection
