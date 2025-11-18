@@ -20,7 +20,9 @@ import {
 import {
   Box,
   ChevronRight,
+  ClipboardList,
   Database,
+  FileSpreadsheet,
   FileText,
   Folders,
   Home,
@@ -79,15 +81,15 @@ export default function AppSidebarContent() {
       title: "Facturación",
       icon: FileText,
       items: [
-        { name: "Ordenes", href: "/admin/orders", icon: Settings },
-        { name: "Facturas", href: "/admin/invoices", icon: Settings },
+        { name: "Ordenes", href: "/admin/orders", icon: ClipboardList },
+        { name: "Documentos", href: "/admin/invoices", icon: FileSpreadsheet },
       ],
     },
     {
       title: "Mantenedores",
       icon: Database,
       items: [
-        { name: "Usuarios", href: "/admin/users", icon: Package },
+        { name: "Usuarios", href: "/admin/maintainers/users", icon: Users },
         { name: "Productos", href: "/admin/products", icon: Package },
         {
           name: "Atributos",

@@ -16,11 +16,11 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 export default function SidebarProfile() {
-  const { isMobile } = useSidebar();
+  const { isMobile, open } = useSidebar();
   const { data: session } = useSession();
   const router = useRouter();
 
-  if (!session) {
+  if (open && !session) {
     return <Button>Iniciar sesion</Button>;
   }
 
