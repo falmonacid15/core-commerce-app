@@ -166,14 +166,14 @@ export const ImageCropInput = <TFieldValues extends FieldValues = FieldValues>({
 
   return (
     <>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 h-full">
         <div
           {...getRootProps()}
-          className={`relative rounded-lg transition-colors shadow-sm overflow-hidden border-2 border-dashed
+          className={`relative rounded-lg transition-colors shadow-sm overflow-hidden border-2
             ${
               isDragActive
-                ? "border-blue-500 bg-blue-50"
-                : "border-gray-300 hover:border-gray-400 bg-gray-50"
+                ? "border-primary bg-default-100"
+                : "border-default-300 hover:border-default-400 bg-default-200"
             }
             ${error ? "border-red-500" : ""}
             ${
@@ -193,7 +193,7 @@ export const ImageCropInput = <TFieldValues extends FieldValues = FieldValues>({
                 {images.map((image) => (
                   <div
                     key={image.id}
-                    className="relative group aspect-square rounded-lg overflow-hidden border-2 border-gray-200 bg-white hover:border-blue-500 transition-all hover:shadow-md"
+                    className="relative group aspect-square rounded-lg overflow-hidden bg-default-400 transition-all hover:shadow-md"
                   >
                     {image.preview ? (
                       <img
@@ -229,19 +229,19 @@ export const ImageCropInput = <TFieldValues extends FieldValues = FieldValues>({
                     e.stopPropagation();
                     openFileDialog();
                   }}
-                  className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center bg-white hover:bg-gray-50 transition-colors cursor-pointer"
+                  className="border-2 border-default-400 rounded-lg p-4 text-center bg-default-300 hover:bg-default-400 transition-colors cursor-pointer"
                 >
                   <Upload
                     className={`w-6 h-6 mx-auto mb-1 ${
-                      isDragActive ? "text-blue-500" : "text-gray-400"
+                      isDragActive ? "text-primary" : "text-gray-400"
                     }`}
                   />
-                  <p className="text-sm text-gray-600">
+                  <p className="text-sm text-default-600">
                     {isDragActive
                       ? "Suelta las imágenes aquí"
                       : "Agregar más imágenes"}
                   </p>
-                  <p className="text-xs text-blue-500 mt-1">
+                  <p className="text-xs text-primary mt-1">
                     {imageCount} de {maxFiles} imagen
                     {imageCount !== 1 ? "es" : ""}
                   </p>
@@ -253,24 +253,17 @@ export const ImageCropInput = <TFieldValues extends FieldValues = FieldValues>({
               <Upload
                 className={`w-12 h-12 mx-auto mb-3 ${
                   isDragActive
-                    ? "text-blue-500 animate-bounce"
-                    : "text-gray-400"
+                    ? "text-primary animate-bounce"
+                    : "text-default-400"
                 }`}
               />
               {enableCrop && (
-                <Crop className="w-8 h-8 mx-auto mb-2 text-blue-500" />
+                <Crop className="w-8 h-8 mx-auto mb-2 text-primary" />
               )}
-              <p className="text-gray-700 font-medium mb-1">{label}</p>
-              <p className="text-gray-500 text-xs whitespace-pre-line">
+              <p className="text-default-700 font-medium mb-1">{label}</p>
+              <p className="text-default-500 text-xs whitespace-pre-line">
                 {description}
               </p>
-              {enableCrop && (
-                <p className="text-blue-500 text-xs mt-2">
-                  Recorte{" "}
-                  {cropAspect === "square" ? "cuadrado" : "rectangular (16:9)"}{" "}
-                  activado
-                </p>
-              )}
             </div>
           )}
         </div>

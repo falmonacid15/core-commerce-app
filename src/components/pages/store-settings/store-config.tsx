@@ -26,23 +26,27 @@ export default function StoreConfig() {
           Editar configuración de la Tienda
         </Button>
       </CardHeader>
-      <CardBody className="flex gap-4">
-        <ImageCropInput
-          control={control}
-          name="images"
-          enableCrop={true}
-          cropAspect="square"
-          multiple={true}
-          maxFiles={3}
-        />
-        <ImageCropInput
-          control={control}
-          name="images"
-          enableCrop={true}
-          cropAspect="rectangle"
-          multiple={true}
-          maxFiles={3}
-        />
+      <CardBody className="grid grid-cols-3 gap-4">
+        <div className="col-span-1">
+          <ImageCropInput
+            control={control}
+            name="images"
+            enableCrop={true}
+            cropAspect="square"
+            multiple={true}
+            maxFiles={3}
+          />
+        </div>
+        <div className="col-span-2">
+          <ImageCropInput
+            control={control}
+            name="images"
+            enableCrop={true}
+            cropAspect="rectangle"
+            multiple={true}
+            maxFiles={3}
+          />
+        </div>
       </CardBody>
     </Card>
   );
